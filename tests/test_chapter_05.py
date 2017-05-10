@@ -22,3 +22,11 @@ def test_get_parity(x, expected_parity):
 ])
 def test_swap_bits(x, i, j, expected_x):
     assert chapter_05.swap_bits(x, i, j) == expected_x
+
+
+@pytest.mark.parametrize('x, expected_x', [
+    (2 ** 64 - 1, 2 ** 64 - 1),
+    (2 ** 63, 1),
+])
+def test_reverse_bits(x, expected_x):
+    assert chapter_05.reverse_bits(x) == expected_x

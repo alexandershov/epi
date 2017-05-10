@@ -37,3 +37,32 @@ def get_bit(x, i):
 
 def toggle_bit(x, i):
     return x ^ (1 << i)
+
+
+def reverse_bits(x):
+    result = 0
+    for i in range(8):
+        result <<= 8
+        result = result | reverse_byte(x & 255)
+        x >>= 8
+    return result
+
+
+def reverse_byte(b):
+    return REVERSED_BYTES[b]
+
+
+def make_reversed_bytes():
+    result = []
+    for i in range(256):
+        x = 0
+        n = i
+        for _ in range(8):
+            x <<= 1
+            x = x | (n & 1)
+            n >>= 1
+        result.append(x)
+    return result
+
+
+REVERSED_BYTES = make_reversed_bytes()
