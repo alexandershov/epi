@@ -66,3 +66,26 @@ def make_reversed_bytes():
 
 
 REVERSED_BYTES = make_reversed_bytes()
+
+
+def get_closest(x):
+    for i in range(0, 64):
+        b = get_bit(x, i)
+        if not b:
+            continue
+        res = try_swap(x, i, i - 1)
+        if res is not None:
+            return res
+        res = try_swap(x, i, i + 1)
+        if res is not None:
+            return res
+
+
+def try_swap(x, i, j):
+    if j < 0:
+        return None
+    if j >= 64:
+        return None
+    if get_bit(x, j):
+        return None
+    return swap_bits(x, i, j)

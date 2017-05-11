@@ -30,3 +30,11 @@ def test_swap_bits(x, i, j, expected_x):
 ])
 def test_reverse_bits(x, expected_x):
     assert chapter_05.reverse_bits(x) == expected_x
+
+
+@pytest.mark.parametrize('x, y', [
+    (1, 2),
+    (47, 55),
+])
+def test_get_closest(x, y):
+    assert chapter_05.get_closest(x) == y
