@@ -38,3 +38,35 @@ def test_reverse_bits(x, expected_x):
 ])
 def test_get_closest(x, y):
     assert chapter_05.get_closest(x) == y
+
+
+@pytest.mark.parametrize('s, expected_x', [
+    ('3', 3),
+    ('32', 32),
+    ('-32', -32),
+    ('0', 0),
+])
+def test_string_to_int(s, expected_x):
+    assert chapter_05.string_to_int(s) == expected_x
+
+
+@pytest.mark.parametrize('s', [
+    'abc',
+    '--2',
+    '32abc',
+    '',
+])
+def test_string_to_int_failure(s):
+    with pytest.raises(ValueError):
+        chapter_05.string_to_int(s)
+
+
+@pytest.mark.parametrize('x, expected_s', [
+    (3, '3'),
+    (32, '32'),
+    (-32, '-32'),
+    (0, '0'),
+    (100, '100'),
+])
+def test_int_to_string(x, expected_s):
+    assert chapter_05.int_to_string(x) == expected_s

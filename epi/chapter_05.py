@@ -1,3 +1,6 @@
+import string
+
+
 def get_parity(x):
     parity = 0
     while x:
@@ -109,6 +112,43 @@ def print_subset(items, i):
         i >>= 1
         b += 1
     print()
+
+
+def string_to_int(s):
+    if not s:
+        raise ValueError
+    mul = 1
+    result = 0
+    for i, c in enumerate(s):
+        if i == 0 and c == '-':
+            mul = -1
+            continue
+        if c not in string.digits:
+            raise ValueError
+        result = result * 10 + (ord(c) - ord('0'))
+    return result * mul
+
+
+def int_to_string(x):
+    parts = []
+    if x < 0:
+        neg = True
+    else:
+        neg = False
+    x = abs(x)
+    for d in get_digits(x):
+        parts.append(str(d))
+    if neg:
+        parts.append('-')
+    return ''.join(reversed(parts))
+
+
+def get_digits(x):
+    x, rem = divmod(x, 10)
+    yield rem
+    while x:
+        x, rem = divmod(x, 10)
+        yield rem
 
 
 def main():
