@@ -89,3 +89,34 @@ def try_swap(x, i, j):
     if get_bit(x, j):
         return None
     return swap_bits(x, i, j)
+
+
+def print_powerset(items):
+    items = list(items)
+    for i in range(0, 2 ** len(items)):
+        print_subset(items, i)
+
+
+def print_subset(items, i):
+    b = 0
+    while i:
+        if i == 1:
+            end = ''
+        else:
+            end = ','
+        if i & 1:
+            print(items[b], end=end)
+        i >>= 1
+        b += 1
+    print()
+
+
+def main():
+    print('powerset of {1, 2, 3}')
+    print_powerset({1, 2, 3})
+    print('powerset of {}')
+    print_powerset(set())
+
+
+if __name__ == '__main__':
+    main()
