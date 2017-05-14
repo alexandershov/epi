@@ -1,3 +1,4 @@
+import collections
 import string
 
 
@@ -187,12 +188,12 @@ def bconvert_to_string(x, b):
         x = -x
     else:
         neg = False
-    parts = []
+    parts = collections.deque()
     for digit in bget_digits(x, b):
-        parts.append(CHARS[digit])
+        parts.appendleft(CHARS[digit])
     if neg:
-        parts.append('-')
-    return ''.join(reversed(parts))
+        parts.appendleft('-')
+    return ''.join(parts)
 
 
 def bget_digits(x, b):
