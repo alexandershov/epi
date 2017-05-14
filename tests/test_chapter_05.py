@@ -70,3 +70,25 @@ def test_string_to_int_failure(s):
 ])
 def test_int_to_string(x, expected_s):
     assert chapter_05.int_to_string(x) == expected_s
+
+
+@pytest.mark.parametrize('s,b1,b2,expected_s', [
+    ('3', 10, 2, '11'),
+    ('-3', 10, 2, '-11'),
+    ('17', 10, 16, '11'),
+    ('26', 10, 16, '1a'),
+    ('ff', 16, 10, '255'),
+])
+def test_base_conversion(s, b1, b2, expected_s):
+    assert chapter_05.base_conversion(s, b1, b2) == expected_s
+
+
+@pytest.mark.parametrize('s, b1, b2', [
+    ('3', 3, 10),
+    ('2', 2, 10),
+    ('a', 2, 10),
+    ('g', 16, 10),
+])
+def test_base_conversion_failure(s, b1, b2):
+    with pytest.raises(ValueError):
+        chapter_05.base_conversion(s, b1, b2)

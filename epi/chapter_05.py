@@ -158,5 +158,58 @@ def main():
     print_powerset(set())
 
 
+def base_conversion(s, b1, b2):
+    assert s and (2 <= b1 <= 16) and (2 <= b2 <= 16)
+    x = bconvert_to_int(s, b1)
+    return bconvert_to_string(x, b2)
+
+
+def bconvert_to_int(s, b):
+    mul = 1
+    allowed_digits = get_allowed_digits(b)
+    result = 0
+    for i, c in enumerate(s):
+        if i == 0 and c == '-':
+            mul = -1
+            continue
+        if c not in allowed_digits:
+            raise ValueError
+        result = result * b + allowed_digits[c]
+    return result * mul
+
+
+CHARS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
+
+
+def bconvert_to_string(x, b):
+    if x < 0:
+        neg = True
+        x = -x
+    else:
+        neg = False
+    parts = []
+    for digit in bget_digits(x, b):
+        parts.append(CHARS[digit])
+    if neg:
+        parts.append('-')
+    return ''.join(reversed(parts))
+
+
+def bget_digits(x, b):
+    x, rem = divmod(x, b)
+    yield rem
+    while x:
+        x, rem = divmod(x, b)
+        yield rem
+
+
+def get_allowed_digits(b):
+    assert 2 <= b <= 16
+    return {
+        CHARS[i]: i
+        for i in range(0, b)
+    }
+
+
 if __name__ == '__main__':
     main()
