@@ -1,3 +1,5 @@
+import string
+
 import pytest
 
 from epi import chapter_05
@@ -92,3 +94,13 @@ def test_base_conversion(s, b1, b2, expected_s):
 def test_base_conversion_failure(s, b1, b2):
     with pytest.raises(ValueError):
         chapter_05.base_conversion(s, b1, b2)
+
+
+@pytest.mark.parametrize('s, alphabet, expected_column', [
+    ('AA', string.ascii_uppercase, 27),
+    ('AB', string.ascii_uppercase, 28),
+    ('Z', string.ascii_uppercase, 26),
+    ('ACB', 'ABC', 20),
+])
+def test_spreadsheet_column(s, alphabet, expected_column):
+    assert chapter_05.spreadsheet_column(s, alphabet) == expected_column

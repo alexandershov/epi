@@ -212,5 +212,13 @@ def get_allowed_digits(b):
     }
 
 
+def spreadsheet_column(s, alphabet=string.ascii_uppercase):
+    base = len(alphabet)
+    column = 0
+    for c in s:
+        column = column * base + (ord(c) - ord('A') + 1)
+    return column
+
+
 if __name__ == '__main__':
     main()
